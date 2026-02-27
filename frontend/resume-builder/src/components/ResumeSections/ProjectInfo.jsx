@@ -18,7 +18,7 @@ const ProjectInfo=(
         >
             {title}
         </h3>
-        <p className="text-sm text-gray-700 font-medium mt-1" style={{whiteSpace: "pre-line"}}>{description.replace(/\\n/g, '\n')}</p>
+        <p className="text-sm text-gray-700 font-medium mt-1" style={{whiteSpace: "pre-line"}}>{description?description.replace(/\\n/g, '\n') : ""}</p>
 
         <div className="flex items-center gap-3 mt-2">
             {githubLink && <ActionLink icon={<LuGithub/>} link={githubLink} bgColor={bgColor}/>}

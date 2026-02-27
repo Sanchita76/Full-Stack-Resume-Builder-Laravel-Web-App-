@@ -22,7 +22,7 @@ const WorkExperience=({
             </div>
 
             <p className="text-sm text-gray-600 font-medium italic mt-[0.2cqw]" style={{ fontFamily: 'Trebuchet MS',whiteSpace: "pre-line" }}>
-                {description.replace(/\\n/g, '\n')}
+                {description? description.replace(/\\n/g, '\n') : ''};
             </p>
         </div>
 };

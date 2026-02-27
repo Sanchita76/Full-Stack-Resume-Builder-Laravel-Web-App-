@@ -14,6 +14,8 @@ const SignUp = ({setCurrentPage}) => {
   const [fullName,setFullName]=useState("");
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
+  const [role, setRole] = useState("user"); // ✅ ADD THIS LINE
+  const [passkey, setPasskey] = useState(""); // ✅ NEW - Admin passkey field
 
   const[error,setError]=useState(null);
 
@@ -23,7 +25,7 @@ const SignUp = ({setCurrentPage}) => {
 
   //Handle SignUp Form Submit
   const handleSignUp=async(e)=>{
-    // e.preventDefault();
+    e.preventDefault();
 
     let profileImageUrl="";
 
@@ -42,6 +44,12 @@ const SignUp = ({setCurrentPage}) => {
       return;
     }
 
+    // ✅ Validate admin passkey
+    if (role === 'admin' && passkey !== 'CODECLOUDS') {
+      setError("Invalid admin passkey. Please contact the administrator.");
+      return;
+    }
+
     setError("");
 
     //SignUp API Call
@@ -57,6 +65,8 @@ const SignUp = ({setCurrentPage}) => {
         name:fullName,
         email,
         password,
+        role, // ✅ ADD THIS LINE
+        passkey: role === 'admin' ? passkey : undefined, // ✅ Only send if admin
         profileImageUrl,
       });
 
@@ -65,7 +75,14 @@ const SignUp = ({setCurrentPage}) => {
       if(token){
         localStorage.setItem("token",token);
         updateUser(response.data);
-        navigate("/dashboard");
+      //   navigate("/dashboard");
+      // }
+      // ✅ Redirect based on role
+        if (response.data.role === 'admin') {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/dashboard");
+        }
       }
     }catch(error){
       if(error.response && error.response.data.message){
@@ -91,6 +108,80 @@ const SignUp = ({setCurrentPage}) => {
 
 
         <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
+
+
+          {/* ✅ ADD THIS ROLE SELECT FIELD */}
+          {/* <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium text-slate-700">
+              Role
+            </label>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="input-box px-4 py-2.5 rounded-lg border border-slate-300"
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div> */}
+
+
+          <div className="flex flex-col gap-2 w-full">
+  <label className="text-sm font-medium text-slate-600">
+    Role
+  </label>
+
+  <div className="relative">
+    <select
+      value={role}
+      onChange={(e) => setRole(e.target.value)}
+      className="w-full appearance-none bg-slate-50
+                 px-4 py-3 pr-12
+                 rounded-xl border border-slate-300
+                 text-slate-700 text-sm
+                 shadow-sm
+                 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                 hover:border-slate-400
+                 transition-all duration-200 ease-in-out"
+    >
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+
+    {/* Custom Arrow */}
+    <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400">
+      <svg
+        className="w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+
+
+                  {/* ✅ END OF NEW SECTION */}
+
+          {/* ✅ Admin Passkey Field - Only shown if admin is selected */}
+          {role === 'admin' && (
+            <div className="bg-yellow-50 border border-yellow-300 rounded-lg p-3 mb-2">
+              <Input
+                value={passkey}
+                onChange={({target}) => setPasskey(target.value)}
+                label="Admin Passkey"
+                placeholder="Enter admin passkey"
+                type="password"
+              />
+              <p className="text-xs text-amber-600 mt-1">
+                ⚠️ Admin registration requires a valid passkey
+              </p>
+            </div>
+          )}
 
           <Input 
           value={fullName}
@@ -126,6 +217,7 @@ const SignUp = ({setCurrentPage}) => {
           <p className="text-[13px] text-slate-800 mt-3">
             Already have an account?{" "}
             <button 
+            type="button"
               className="font-medium text-blue-500 underline cursor-pointer"
               onClick={()=>{
                 setCurrentPage("login");

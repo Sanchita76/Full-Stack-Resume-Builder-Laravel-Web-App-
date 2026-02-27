@@ -4,7 +4,7 @@ import Input from '../../components/Inputs/Input';
 import {API_PATHS} from '../../utils/apiPaths';
 import axiosInstance from '../../utils/axiosInstance';
 
-const CreateResumeForm = ({onSuccess, preSelectedTemplateId}) => {
+const CreateResumeForm = ({onSuccess, preSelectedTemplateId, targetUserId}) => {
   const [title,setTitle]=useState("");
   const [error,setError]=useState(null);
   const [loading, setLoading] = useState(false);
@@ -28,17 +28,42 @@ const CreateResumeForm = ({onSuccess, preSelectedTemplateId}) => {
     //Create Resume API Call
      setLoading(true);
     try{
+
+      let response;
+
+      // ✅ If targetUserId is provided, admin is creating for that user
+      if (targetUserId) {
+        response = await axiosInstance.post(
+          API_PATHS.ADMIN.CREATE_USER_RESUME(targetUserId),
+          {
+            title,
+            template: {
+              theme: preSelectedTemplateId || "01",
+              colorPalette: [],
+            },
+          }
+        );
+      } else {
+        // Regular user creating their own resume
+        response = await axiosInstance.post(API_PATHS.RESUME.CREATE, {
+          title,
+          template: {
+            theme: preSelectedTemplateId || "01",
+            colorPalette: [],
+          },
+        });
+      }
       console.log("Creating resume with template:", preSelectedTemplateId);
 
-      const response = await axiosInstance.post(API_PATHS.RESUME.CREATE,
-        {
-         title,
-        template: {
-          theme: preSelectedTemplateId || "01",
-          // colorPalette: "",
-          colorPalette: [], // ✅ Always an array
-        },
-      });
+      // const response = await axiosInstance.post(API_PATHS.RESUME.CREATE,
+      //   {
+      //    title,
+      //   template: {
+      //     theme: preSelectedTemplateId || "01",
+      //     // colorPalette: "",
+      //     colorPalette: [], // ✅ Always an array
+      //   },
+      // });
 
         console.log("Response:", response.data); // 👈 Add this    
         

@@ -2,11 +2,11 @@ const User=require("../Models/User");
 const  bcrypt=require("bcryptjs");
 const jwt=require("jsonwebtoken");
 
-const express = require('express');
-const app = express(); //May not need
+// const express = require('express');
+// const app = express(); //May not need
 
-//May not need
-app.use(express.json()); // <-- This line is required!
+// //May not need
+// app.use(express.json()); // <-- This line is required!
 
 //Generate JWT Token
 const generateToken=(userId)=>{
@@ -44,7 +44,8 @@ const registerUser=async(req,res)=>{
             name,
             email,
             password:hashedPassword,
-            profileImageUrl
+            // profileImageUrl
+            profileImageUrl: fixedProfileImageUrl
         });
 
         //Return user data with JWT
@@ -68,15 +69,17 @@ const loginUser=async (req,res)=>{
         // console.log('Request body:', req.body); // Debug line
         const {email,password}=req.body;
 
+        console.log("EMAIL:", email);
+        console.log("PASSWORD:", password);
         const user=await User.findOne({email});
-        if(!user){
-            return res.status(500).json({message:"Invalid email or password."});
+        
+        if (!user) {
+            return res.status(401).json({ message: "Invalid email or password" });
         }
 
-        //Compare Password
-        const isMatch=await bcrypt.compare(password,user.password);
-        if(!isMatch){
-            return res.status(500).json({message:"Invalid email or password."});
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: "Invalid email or password" });
         }
 
         //Return user data with JWT

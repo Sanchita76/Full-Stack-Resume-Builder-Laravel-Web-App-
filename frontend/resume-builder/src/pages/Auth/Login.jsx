@@ -11,6 +11,7 @@ import {API_PATHS} from '../../utils/apiPaths';
 const Login =({setCurrentPage }) => {
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
+  const [role, setRole] = useState("user"); // ✅ ADD THIS (optional)
   const [error,setError]=useState(null);
 
   const {updateUser}=useContext(UserContext);
@@ -40,6 +41,7 @@ const Login =({setCurrentPage }) => {
       const response=await axiosInstance.post(API_PATHS.AUTH.LOGIN,{
         email,
         password,
+        role, // ✅ ADD THIS LINE
       });
 
       const {token}=response.data;
@@ -47,7 +49,13 @@ const Login =({setCurrentPage }) => {
       if(token){
         localStorage.setItem("token",token);
         updateUser(response.data);
-        navigate("/dashboard");
+        // navigate("/dashboard");
+        // ✅ Redirect based on role
+          if (response.data.role === 'admin') {
+            navigate("/admin/dashboard");
+          } else {
+            navigate("/dashboard");
+          }
       }
     }catch(error){
       if(error.response && error.response.data.message){
@@ -67,6 +75,63 @@ const Login =({setCurrentPage }) => {
     </p>
 
     <form onSubmit={handleLogin}>
+
+      {/* ✅ ADD THIS ROLE SELECT (OPTIONAL) */}
+        {/* <div className="flex flex-col gap-2 mb-4">
+          <label className="text-sm font-medium text-slate-700">
+            Login as
+          </label>
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="input-box px-4 py-2.5 rounded-lg border border-slate-300"
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div> */}
+
+
+
+        <div className="flex flex-col gap-2 mb-4 w-full">
+  <label className="text-sm font-semibold text-slate-600 tracking-wide">
+    Login as
+  </label>
+
+  <div className="relative">
+    <select
+      value={role}
+      onChange={(e) => setRole(e.target.value)}
+      className="w-full appearance-none bg-slate-50
+                 px-4 py-3 pr-12
+                 rounded-xl border border-slate-300
+                 text-sm text-slate-700
+                 shadow-sm
+                 hover:border-slate-400
+                 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                 transition-all duration-200 ease-in-out"
+    >
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+
+    {/* Custom Dropdown Icon */}
+    <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400">
+      <svg
+        className="w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+
+
       
       <Input
         value={email}
@@ -96,6 +161,7 @@ const Login =({setCurrentPage }) => {
       <p className="text-[13px] text-slate-800 mt-3">
   Don't have an account?{" "}
   <button
+  type="button"
   className="font-medium text-blue-500 cursor-pointer"
   style={{ textDecoration: "underline" }}
   onClick={() => setCurrentPage("signup")}
