@@ -458,6 +458,7 @@ Resume-Builder/
 
 ### Screenshots from UI
 
+## Active Account Layout
 #### Home Page
 ###### Templates Section
 <img width="455" height="351" alt="Screenshot 2025-11-03 235355" src="https://github.com/user-attachments/assets/294e6106-3da4-4cba-aad5-56737c7feaed" /><br>
@@ -474,10 +475,28 @@ Resume-Builder/
 <img width="455" height="350" alt="Screenshot 2025-11-03 235425" src="https://github.com/user-attachments/assets/7a06d139-2c6e-4e78-b927-f482636180d1" />
 <br>
 
-#### Dashboard Page
-###### Resume Dashboard
+#### Account View
+###### User Resume Dashboard
 <img width="455" height="350" alt="Screenshot 2025-11-03 235441" src="https://github.com/user-attachments/assets/6f2063b5-50dd-4ec4-bc5a-3f76a37be384" />
 <br>
+
+#### Admin Dashboard (Live stats)
+<img width="455" height="350" alt="Screenshot 2025-11-03 235441" src="https://github.com/user-attachments/assets/b9ab7e5d-ffad-44b2-a3ad-33cf39f4039f" />
+<br>
+
+#### Admin Dashboard Account Management (Edit Account Credentials)
+<img width="455" height="350" alt="Screenshot 2025-11-03 235441" src="https://github.com/user-attachments/assets/cd38467e-2e97-4510-95be-b6650c41f1b3" />
+<br>
+
+#### Admin Create accounts
+<img width="455" height="350" alt="Screenshot 2025-11-03 235441" src="https://github.com/user-attachments/assets/1992f04a-b584-4eaa-84dd-058d545d5a1c" />
+<br>
+
+
+#### Admin Managing User Resumes (Create/Modify,Delete)
+<img width="455" height="350" alt="Screenshot 2025-11-03 235441" src="https://github.com/user-attachments/assets/0dcb1973-e5e1-4bd0-9d4e-4d40a9e4323d" />
+<br>
+
 
 #### Resume Edit Page
 ###### Resume Edit Section
