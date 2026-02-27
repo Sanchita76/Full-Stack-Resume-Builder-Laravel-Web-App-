@@ -1,0 +1,7 @@
+node_modules/
+vendor/
+.env
+backend/node_modules/
+frontend/node_modules/
+laravel-backend/vendor/
+laravel-backend/.env
