@@ -563,5 +563,5 @@ This project is licensed under the MIT License.
 
 [⬆ Back to Top](#intelliresume--ats-resume-builder)
 
-</div>>
+</div>
 
