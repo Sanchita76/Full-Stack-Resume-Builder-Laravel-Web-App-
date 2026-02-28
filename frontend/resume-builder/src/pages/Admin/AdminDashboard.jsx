@@ -4,6 +4,7 @@ import { UserContext } from "../../context/userContext";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
+import UserAvatar from "../../components/UserAvatar";
 import {
   LuUserPlus,
   LuSearch,
@@ -376,7 +377,7 @@ const AdminDashboard = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {user._id}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      {/* <td className="px-6 py-4 whitespace-nowrap">    correcting non image profiles
                         <div className="flex items-center">
                           <img
                             src={
@@ -386,6 +387,18 @@ const AdminDashboard = () => {
                             alt={user.name}
                             className="w-8 h-8 rounded-full mr-3 object-cover"
                           />
+                          <span className="text-sm font-medium text-gray-900">
+                            {user.name}
+                          </span>
+                        </div>
+                      </td> */}
+
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          {/* ✅ Use UserAvatar component */}
+                          <div className="mr-3">
+                              <UserAvatar user={user} size="sm" />
+                          </div>
                           <span className="text-sm font-medium text-gray-900">
                             {user.name}
                           </span>

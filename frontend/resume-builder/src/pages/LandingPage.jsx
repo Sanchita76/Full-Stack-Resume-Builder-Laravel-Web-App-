@@ -40,21 +40,6 @@ const LandingPage=() => {
         }
     }; 
 
-    //New added for Admin Redirect to table view
-//     const handleGetStarted = () => {
-//   if (user) {
-//     // User is logged in, redirect based on role
-//     if (user.role === 'admin') {
-//       navigate('/admin/dashboard');
-//     } else {
-//       navigate('/dashboard');
-//     }
-//   } else {
-//     // User is not logged in, show signup/login
-//     // Your existing code here (open modal or redirect to auth page)
-//   }
-// };  Not required as we are handling it in handleCTA itself
-
 
     // ✅ Independent callback for template selection
   const handleTemplateSelect = (templateId) => {
