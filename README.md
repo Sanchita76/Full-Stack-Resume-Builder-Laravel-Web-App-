@@ -517,13 +517,6 @@ Resume-Builder/
 <img width="455" height="300" alt="Screenshot 2025-11-03 235714" src="https://github.com/user-attachments/assets/27742ad5-7ca0-4678-9ff6-157608adce0c" />
 <br>
 
-### SRS Document 📜
-##### DFD Diagram View
-<img width="500" height="548" alt="image" src="https://github.com/user-attachments/assets/b1fc66d4-5da6-4ae7-b1a3-4cbe5786da3d" /><br>
-
-##### ER Diagram View
-<img width="455" height="355" alt="image" src="https://github.com/user-attachments/assets/0b96cd3f-3ebf-4099-8f18-0b71ffde5b1a" />
-
 
 ## 🤝 Contributing
 
