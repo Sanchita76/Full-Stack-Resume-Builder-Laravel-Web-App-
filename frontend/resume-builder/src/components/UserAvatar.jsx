@@ -142,10 +142,6 @@
 
 
 
-
-
-
-
 import React from 'react';
 
 const UserAvatar = ({ user, size = 'md' }) => {
@@ -165,7 +161,8 @@ const UserAvatar = ({ user, size = 'md' }) => {
     }
     
     // ✅ Add cache-busting for relative URLs too
-    return `http://localhost:8000${url}?t=${Date.now()}`;
+    // return `http://localhost:8000${url}?t=${Date.now()}`;
+    return `${BASE_URL}${url}?t=${Date.now()}`;  // ✅ was hardcoded http://localhost:8000
   };
 
   const sizeClasses = {

@@ -4,7 +4,6 @@
 // import { useContext } from 'react';
 // import UserAvatar from './UserAvatar';
 
-
 // const ProfileInfoCard=()=>{
 //     const {user,clearUser}=useContext(UserContext);
 //     const navigate=useNavigate();
@@ -60,12 +59,6 @@
 
 // export default ProfileInfoCard;
 
-
-
-
-
-
-
 import React from 'react'
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from 'react-router-dom';
@@ -81,7 +74,7 @@ const ProfileInfoCard = () => {
         clearUser();
         navigate('/');
     };
-
+    
     return (
         user && (
             <div className="flex items-center pr-4">
@@ -105,5 +98,4 @@ const ProfileInfoCard = () => {
         )
     );
 };
-
 export default ProfileInfoCard;
